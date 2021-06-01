@@ -12,7 +12,20 @@ const users = [
         firstName: 'Testi', 
         lastName: 'Moni' 
     },
+    {   id: 3, 
+        username: 'mahen12', 
+        password: 'wMOAePoEsXwMt7TbZ2lu', 
+        firstName: 'Mahen', 
+        lastName: 'Dor' 
+    },
 ];
+
+const broker = 
+    {
+        url: '180.250.135.100',
+        port : 8833
+    }
+
 
 module.exports = {
     authenticate,
@@ -28,8 +41,5 @@ async function authenticate({ username, password }) {
 }
 
 async function getAll() {
-    return users.map(u => {
-        const { password, ...userWithoutPassword } = u;
-        return userWithoutPassword;
-    });
+        return broker;
 }
