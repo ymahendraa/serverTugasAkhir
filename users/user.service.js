@@ -40,8 +40,8 @@ const users = [
 
 const broker = 
     {
-        url: '180.250.135.100',
-        port : 8833,
+        url: '192.168.8.140',
+        port : '4444',
         K1 : "jXn2r5u8x/A?D(G+"
     }
 
@@ -60,7 +60,8 @@ async function authenticate({ clientID, key }) {
     // const [username, password] = decryptedAuthPay.split(':::');
     const user = await User.findOne({ clientID });
     // const user = users.find(u => u.username === username && u.password === password);
-    if (user && bcrypt.compareSync(key, user.hash)) {
+    const pass = key === user.key;
+    if (user && pass) {
         // const user = users.find(u => u.username === username && u.password === password);
         // Encrypt
         let encKey = key
@@ -101,7 +102,7 @@ async function create(userParam) {
 
     // hash password
     if (userParam.key) {
-        user.hash = bcrypt.hashSync(userParam.key, 10);
+        user.hash = userParam.key;
     }
 
     // save user
